@@ -39,7 +39,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true,}))
 app.use(express.urlencoded());         
 app.post('/login/checker', loginChecker)
-app.post('/app/get_user', loginChecker)
+app.post('/app/get_user', get_user)
 app.listen(port, function(err){
     if(err){
         console.error("error on loading server" ,err)

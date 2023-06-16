@@ -1,5 +1,6 @@
 const pool=require('../../config/postgres')
 const bcrypt=require('bcrypt')
+const { emailid } = require('../../tokens')
 const saltround=10
 getuser=async function(req, res){
     const query='SELECT * FROM users WHERE mail=$1'
@@ -7,9 +8,9 @@ getuser=async function(req, res){
     if(req.body.secret==undefined&&req.body.password==undefined){
         res.json({error:'Authentication Error. Please try again'})
     }
-    if(req.body.secret==undefined){
+    else if(req.body.secret==undefined){
         if(req.body.password==rows[0].password){
-            res.json({success : "Updated Successfully", status : 200})
+            res.json({success : "Updated Successfully", status : 200, user:rows[0]})
         }
         else{
             res.json({error:'Authentication Error. Please try again'})
@@ -17,7 +18,7 @@ getuser=async function(req, res){
     }
     else{
         if(req.body.secret==rows[0].user_secret){
-            res.json({success : "Updated Successfully", status : 200})
+            res.json({success : "Updated Successfully", status : 200, user:rows[0]})
         }
         else{
             res.json({error:'Authentication Error. Please try again'})
