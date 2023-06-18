@@ -1,6 +1,7 @@
 const express=require("express");
 const bodyParser = require('body-parser')
 const path=require('path')
+const get_pic=require('./Services/Other/Send_photo_of_user')
 const cors=require('cors')
 const cookies=require('cookie-parser')
 const tokens=require('./tokens.js')
@@ -40,6 +41,7 @@ app.use(bodyParser.urlencoded({extended: true,}))
 app.use(express.urlencoded());         
 app.post('/login/checker', loginChecker)
 app.post('/app/get_user', get_user)
+app.post('/app/get_pic',get_pic)
 app.listen(port, function(err){
     if(err){
         console.error("error on loading server" ,err)
