@@ -9,6 +9,7 @@ loginChecker=async function(req, res){
     }
     if(req.body.secret==undefined){
         if(req.body.password==rows[0].password){
+            rows[0].password=""
             res.json({success : "Updated Successfully", status : 200, user: rows[0]})
         }
         else{
@@ -17,6 +18,7 @@ loginChecker=async function(req, res){
     }
     else{
         if(req.body.secret==rows[0].user_secret){
+            rows[0].password=""
             res.json({success : "Updated Successfully", status : 200, user: rows[0]})
         }
         else{
