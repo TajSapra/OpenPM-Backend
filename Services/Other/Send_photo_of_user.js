@@ -1,6 +1,4 @@
 sendpic=async function(req, res){
-    const curr=req.body.email
-    console.log('C:/Users/sapra/Desktop/Taj/webd/React Projects/OpenPM_Backend/photos/'+req.body.email.replaceAll('.', '_')+'.JPG')
     if(req.body.email==undefined){
         res.json({error:'Email Not Found. Please try again'})
     }
