@@ -8,6 +8,7 @@ const tokens=require('./tokens.js')
 const session=require('express-session')
 const expresslayout=require('express-ejs-layouts')
 const passport = require('passport');
+const signup=require('./Services/Other/Create_New_User')
 const loginChecker=require('./Services/Other/Login_Checker.js')
 const get_user =require('./Services/Other/verify_and_get_user.js')
 const sessionPool = require('pg').Pool
@@ -40,6 +41,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true,}))
 app.use(express.urlencoded());         
 app.post('/login/checker', loginChecker)
+app.post('/signup/add',signup.upload_img ,signup.addnewuser)
 app.post('/app/get_user', get_user)
 app.post('/app/get_pic',get_pic)
 app.listen(port, function(err){
