@@ -16,7 +16,6 @@ array_of_string_to_json=async function(data){
 }
 getuser=async function(req, res){
     const query='SELECT * FROM users WHERE mail=$1'
-    console.log(req.body)
     const {rows}=await pool.query(query, [req.body.emailid])
     if(rows.length==0){
         res.json({error:'Authentication Error. Please try again'})

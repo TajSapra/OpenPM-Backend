@@ -35,6 +35,7 @@ app.use(session({
     resave: false, 
     saveUninitialized: false,   
 }))
+
 app.use(cookies())
 app.use(expresslayout)
 app.use(bodyParser.json())
