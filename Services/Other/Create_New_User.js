@@ -6,7 +6,6 @@ const saltround=10
 const storageimg=multer.diskStorage({
 	destination:(req, file, cb) =>{
 		curr_email=req.body.User_email.replaceAll('.', '_')
-        console.log(curr_email)
         if(fs.existsSync(`./photos/`)){
             cb(null, `./photos/`)
         }
@@ -17,7 +16,6 @@ const storageimg=multer.diskStorage({
     },
 	filename:function(req,file,cb){
 		curr_email=req.body.User_email.replaceAll('.', '_')
-        console.log(curr_email)
 		cb(null, curr_email+'.jpg')
 	}
 })
@@ -26,10 +24,8 @@ const upload_img=multer({
     fileFilter: (req, file, cb) => {
         if(file.mimetype!='image/jpg'&&file.mimetype!='image/jpeg'){
             cb(null, false)
-            console.log("Error here")
             return cb(new Error('Only .jpg format allowed!'))
         }
-        console.log(req.body)
         cb(null, true)
     }
 }).single('upload_image')
@@ -43,7 +39,6 @@ addnewuser=async function(req, res){
             const hash=bcrypt.hashSync(req.body.User_email+req.body.User_name, saltround)
             var userdata=[req.body.User_email, req.body.User_name, hash, req.body.User_org, req.body.password]
             pool.query('INSERT into users(mail, username, user_secret, organisation, password) VALUES($1,$2,$3,$4,$5)',userdata)
-            console.log(userdata)
             res.json({message:'New Account Created'})
         }
     })
