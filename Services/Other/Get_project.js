@@ -6,7 +6,15 @@ const access_allowed=async function(email, project){
 }
 const get_project=async function(req,res){
     const {rows}=await pool.query('Select * from projects where project_id=$1', [req.body.projectId])
-    // console.log(rows[0])
+    if(rows[0]['completed_tasks']==null){
+        rows[0]['completed_tasks']=new Array() 
+    }
+    if(rows[0]['assigned_tasks']==null){
+        rows[0]['assigned_tasks']=new Array()  
+    }
+    if(rows[0]['todo_tasks']==null){
+        rows[0]['todo_tasks']=new Array() 
+    }
     if(rows.length==0){
         res.json({error:'No such project found'})
     }
