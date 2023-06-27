@@ -11,6 +11,7 @@ const passport = require('passport');
 const get_project=require('./Services/Other/Get_project.js')
 const signup=require('./Services/Other/Create_New_User')
 const loginChecker=require('./Services/Other/Login_Checker.js')
+const create_project=require('./Services/Other/CreateProject')
 const get_user =require('./Services/Other/verify_and_get_user.js')
 const sessionPool = require('pg').Pool
 const { Client } = require('pg')
@@ -47,6 +48,7 @@ app.post('/signup/add',signup.upload_img ,signup.addnewuser)
 app.post('/app/get_user', get_user)
 app.post('/app/get_pic',get_pic)
 app.post('/app/get_project', get_project)
+app.post('/app/create_project', create_project)
 app.listen(port, function(err){
     if(err){
         console.error("error on loading server" ,err)
